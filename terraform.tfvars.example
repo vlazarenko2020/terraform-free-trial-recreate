@@ -1,0 +1,12 @@
+# Copy to terraform.tfvars (gitignored) and fill in real values. Dummy values only.
+organization_name = "your-org"
+account_name      = "your-account"
+snowflake_user    = "TERRAFORM_SVC"
+private_key_path  = "~/.ssh/your_key.p8"
+
+login_name  = "FIRSTNAME_LASTNAME"
+first_name  = "FirstName"
+middle_name = ""
+last_name   = "LastName"
+email       = "user@example.com"
+password    = "change-me"

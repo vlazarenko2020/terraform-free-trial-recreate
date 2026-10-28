@@ -1,0 +1,13 @@
+
+# Local Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!example.tfvars
+
+# Sensitive keys and local overrides
+*.p8
+*.pem
+.DS_Store
