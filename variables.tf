@@ -30,6 +30,12 @@ variable "password" {
   description = "Initial password for the user"
   sensitive   = true
 }
+variable "default_password" {
+  type        = string
+  description = "Default password password for the user. Will be ask to change during first login"
+  sensitive   = true
+}
+
 variable "organization_name" {
   type        = string
   description = "Snowflake organization name"
