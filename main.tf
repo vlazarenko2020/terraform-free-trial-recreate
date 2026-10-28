@@ -1,8 +1,23 @@
+# terraform {
+#   required_providers {
+#     snowflake = {
+#       source = "snowflakedb/snowflake"
+#     }
+#   }
+# }
+
 terraform {
   required_providers {
     snowflake = {
       source = "snowflakedb/snowflake"
     }
+  }
+  backend "s3" {
+    bucket         = "terraform-900123204721-us-east-2-an"
+    key            = "snowflake/users-project/terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "terraform-state-locks"
+#   profile        = "your-aws-profile-name" # Optional: remove if you use export AWS_PROFILE
   }
 }
 
