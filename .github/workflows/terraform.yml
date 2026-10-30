@@ -24,6 +24,8 @@ jobs:
       SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
       SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
+      # Add this line so Terraform automatically satisfies var.account_name:
+      TF_VAR_account_name: ${{ secrets.SNOWFLAKE_ACCOUNT }}
 
     steps:
       - name: Checkout Repository
