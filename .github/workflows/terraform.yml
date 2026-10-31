@@ -82,9 +82,12 @@ jobs:
       - name: Create Private Key File
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/snowflake_tf_snow_key.p8
+          cat << 'EOF' > ~/.ssh/snowflake_tf_snow_key.p8
+          ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+          EOF
+          tr -d '\r' ~/.ssh/snowflake_tf_snow_key.p8 > ~/.ssh/snowflake_tf_snow_key.p8.tmp
+          mv ~/.ssh/snowflake_tf_snow_key.p8.tmp ~/.ssh/snowflake_tf_snow_key.p8
           chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
-
 
       - name: Terraform Plan
         id: plan
