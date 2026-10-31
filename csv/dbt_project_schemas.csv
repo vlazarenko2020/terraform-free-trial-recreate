@@ -1,0 +1,4 @@
+schema_name,comment
+bronze,"Bronze Schema for the test dbt database created by Terraform"
+silver,"Silver Schema for the test dbt database created by Terraform"
+gold,"Gold Schema for the test dbt database created by Terraform"
