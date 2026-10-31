@@ -22,9 +22,9 @@ jobs:
       # AWS_REGION: ${{ secrets.AWS_REGION }}
 
 
-      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      # SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+      SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}  # -- Private Key content from fiole in .ssh/snowflake_tf_snow_key.p8
       SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
 
 
@@ -32,7 +32,6 @@ jobs:
       TF_VAR_organization_name: ${{ secrets.SNOWFLAKE_ORGANIZATION_NAME }}
       TF_VAR_account_name: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       TF_VAR_snowflake_user: ${{ secrets.SNOWFLAKE_USER }}
-      # TF_VAR_private_key_path: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
       TF_VAR_private_key_path: "~/.ssh/snowflake_tf_snow_key.p8"
 
 
