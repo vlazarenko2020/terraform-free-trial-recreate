@@ -32,8 +32,8 @@ jobs:
       TF_VAR_organization_name: ${{ secrets.SNOWFLAKE_ORGANIZATION_NAME }}
       TF_VAR_account_name: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       TF_VAR_snowflake_user: ${{ secrets.SNOWFLAKE_USER }}
-      TF_VAR_private_key_path: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
-      # TF_VAR_private_key_path: "~/.ssh/snowflake_tf_snow_key.p8"
+      # TF_VAR_private_key_path: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+      TF_VAR_private_key_path: "~/.ssh/snowflake_tf_snow_key.p8"
 
 
       # - variables that are defined in variables.tf and terraform.tfvars
