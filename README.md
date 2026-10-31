@@ -11,9 +11,9 @@ Terraform configuration that (re)creates a set of objects in a Snowflake free-tr
 | `dbt_project.tf` | `tasty_bytes_dbt_db` database; one schema per row of `csv/dbt_project_schemas.csv` (bronze, silver, gold) |
 | `snowflake_roles.tf` | `FINANCE_ANALYST` account role |
 | `snowflake_users.tf` | One user (details from variables), with the warehouse and role above as defaults |
-| `snowflake_users_from_csv.tf` | One user per row of `csv/users-finance.csv`, all sharing `default_password` |
+| `snowflake_users_from_yaml.tf` | One user per entry in `yaml/users-finance.yml`, all sharing `default_password` |
 
-To add schemas or users, add a row to the matching CSV file; no `.tf` change is needed. Users must change their password at first login.
+To add a user, add an entry to `yaml/users-finance.yml`; to add a schema, add a row to `csv/dbt_project_schemas.csv`. No `.tf` change is needed. Users must change their password at first login.
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ State is stored remotely in an S3 bucket (key `snowflake/users-project/terraform
    | `private_key_path` | Path to the `.p8` private key |
    | `login_name`, `first_name`, `middle_name` (optional), `last_name`, `email` | Details of the single user in `snowflake_users.tf` |
    | `password` | Initial password for that user (sensitive) |
-   | `default_password` | Shared initial password for all users created from the CSV (sensitive) |
+   | `default_password` | Shared initial password for all users created from the YAML file (sensitive) |
 
 2. Run Terraform:
 

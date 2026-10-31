@@ -1,10 +1,10 @@
 
-# 1. Read and parse the CSV file into a map, keyed by the login_name
+# 1. Read and parse the YAML file into a list of user objects
 locals {
-  users_data = csvdecode(file("${path.module}/csv/users-finance.csv"))
+  users_data = yamldecode(file("${path.module}/yaml/users-finance.yml")).users
 }
 
-# csvdecode(...): Takes that raw text and converts it into a list of maps, where each row becomes a dictionary 
+# yamldecode(...): Takes that raw text and converts it into an object; .users is the list of user maps, one per user 
 # for example: 
 # [ 
 #     {first_name = "John", last_name = "Doe" ...}, 
