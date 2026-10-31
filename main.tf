@@ -13,12 +13,12 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "terraform-900123204721-us-east-2-an"
-    key            = "snowflake/users-project/terraform.tfstate"
-    region         = "us-east-2"
-    use_lockfile   = true # <--- Replaces dynamodb_table
-#   dynamodb_table = "terraform-state-locks"  # no longer needed if using "use_lockfile = true"
-#   profile        = "your-aws-profile-name" # Optional: remove if you use export AWS_PROFILE
+    bucket       = "terraform-900123204721-us-east-2-an"
+    key          = "snowflake/users-project/terraform.tfstate"
+    region       = "us-east-2"
+    use_lockfile = true # <--- Replaces dynamodb_table
+    #   dynamodb_table = "terraform-state-locks"  # no longer needed if using "use_lockfile = true"
+    #   profile        = "your-aws-profile-name" # Optional: remove if you use export AWS_PROFILE
   }
 }
 
