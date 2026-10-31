@@ -22,8 +22,12 @@ jobs:
       # AWS_REGION: ${{ secrets.AWS_REGION }}
 
 
-      # SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      # -- in main.tf I use "account_name = var.account_name". It translates to "TF_VAR_account_name: ${{ secrets.SNOWFLAKE_ACCOUNT }}" that I defined below.
+      # -- No need in SNOWFLAKE_ACCOUNT, because the Snowflake provider will read the account_name from TF_VAR_account_name.
+      # SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }} 
+
+      # SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      
       SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}  # -- Private Key content from fiole in .ssh/snowflake_tf_snow_key.p8
       SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
 
