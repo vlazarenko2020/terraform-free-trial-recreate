@@ -19,13 +19,36 @@ jobs:
 
     # Map environment variables from GitHub Secrets so Terraform/Providers can read them
     env:
-      AWS_REGION: "us-east-2"
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+
       SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
       SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
       SNOWFLAKE_PRIVATE_KEY_PASSPHRASE: ${{ secrets.SNOWFLAKE_PRIVATE_KEY_PASSPHRASE }}
-      # Add this line so Terraform automatically satisfies var.account_name:
+      
+      TF_VAR_organization_name: ${{ secrets.SNOWFLAKE_ORGANIZATION_NAME }}
       TF_VAR_account_name: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      TF_VAR_snowflake_user: ${{ secrets.SNOWFLAKE_USER }}
+
+      TF_VAR_login_name: ${{ secrets.TMP_LOGIN_NAME }}
+      TF_VAR_first_name: ${{ secrets.TMP_FIRST_NAME }}
+      TF_VAR_last_name: ${{ secrets.TMP_LAST_NAME }}
+      TF_VAR_email: ${{ secrets.TMP_EMAIL }}
+      TF_VAR_password:  ${{ secrets.TMP_PASSWORD }}
+      TF_VAR_default_password: ${{ secrets.TMP_DEFAULT_PASSWORD }}
+
+
+      # TF_VAR_private_key_path: ${{ secrets.private_key_path }}   
+      # the GitHub runner is a fresh Linux container and does not have your local ~/.ssh/snowflake_tf_snow_key.p8 file.
+      # Store the private key content as a GitHub Secret (e.g., SNOWFLAKE_PRIVATE_KEY), and add a step in your GitHub Actions workflow 
+      # before terraform plan that writes that secret content into a temporary file on the runner:
+      # - name: Create Private Key File
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > ~/.ssh/snowflake_tf_snow_key.p8
+      #     chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
+
+
 
     steps:
       - name: Checkout Repository
@@ -36,7 +59,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-2
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
