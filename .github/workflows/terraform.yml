@@ -26,6 +26,8 @@ jobs:
       # -- No need in SNOWFLAKE_ACCOUNT, because the Snowflake provider will read the account_name from TF_VAR_account_name.
       # SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }} 
 
+      # -- in main.tf I use "user = var.snowflake_user". It translates to "TF_VAR_snowflake_user: ${{ secrets.SNOWFLAKE_USER }}" that I defined below.
+      # -- No need in SNOWFLAKE_USER, because the Snowflake provider will read the account_name from TF_VAR_snowflake_user.
       # SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
       
       SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}  # -- Private Key content from fiole in .ssh/snowflake_tf_snow_key.p8
