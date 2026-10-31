@@ -82,7 +82,7 @@ jobs:
       - name: Create Private Key File
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > ~/.ssh/snowflake_tf_snow_key.p8
+          echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" | tr -d '\r' > ~/.ssh/snowflake_tf_snow_key.p8
           chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
 
 
