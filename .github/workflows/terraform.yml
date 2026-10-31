@@ -95,18 +95,18 @@ jobs:
 
 
       - name: Create Private Key File
-              run: |
-                mkdir -p ~/.ssh
-                cat << 'EOF' | tr -d '\r' > ~/.ssh/snowflake_tf_snow_key.p8
-                ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
-                EOF
-                chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
-                
-                # Verification: Print head and tail to check PEM format in logs
-                echo "--- KEY FILE PREVIEW ---"
-                head -n 2 ~/.ssh/snowflake_tf_snow_key.p8
-                tail -n 2 ~/.ssh/snowflake_tf_snow_key.p8
-                echo "------------------------"
+        run: |
+          mkdir -p ~/.ssh
+          cat << 'EOF' | tr -d '\r' > ~/.ssh/snowflake_tf_snow_key.p8
+          ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+          EOF
+          chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
+          
+          # Verification: Print head and tail to check PEM format in logs
+          echo "--- KEY FILE PREVIEW ---"
+          head -n 2 ~/.ssh/snowflake_tf_snow_key.p8
+          tail -n 2 ~/.ssh/snowflake_tf_snow_key.p8
+          echo "------------------------"
 
 
       - name: Terraform Plan
