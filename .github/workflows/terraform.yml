@@ -32,8 +32,8 @@ jobs:
       TF_VAR_organization_name: ${{ secrets.SNOWFLAKE_ORGANIZATION_NAME }}
       TF_VAR_account_name: ${{ secrets.SNOWFLAKE_ACCOUNT }}
       TF_VAR_snowflake_user: ${{ secrets.SNOWFLAKE_USER }}
-      # TF_VAR_private_key_path: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
-      TF_VAR_private_key_path: "~/.ssh/snowflake_tf_snow_key.p8"
+      TF_VAR_private_key_path: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+      # TF_VAR_private_key_path: "~/.ssh/snowflake_tf_snow_key.p8"
 
 
       # - variables that are defined in variables.tf and terraform.tfvars
@@ -79,11 +79,11 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Create Private Key File
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > ~/.ssh/snowflake_tf_snow_key.p8
-          chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
+      # - name: Create Private Key File
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     echo "${{ secrets.SNOWFLAKE_PRIVATE_KEY }}" > ~/.ssh/snowflake_tf_snow_key.p8
+      #     chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
 
       # - name: Create Private Key File
       #   run: |
@@ -92,6 +92,22 @@ jobs:
       #     ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
       #     EOF
       #     chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
+
+
+      - name: Create Private Key File
+              run: |
+                mkdir -p ~/.ssh
+                cat << 'EOF' | tr -d '\r' > ~/.ssh/snowflake_tf_snow_key.p8
+                ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+                EOF
+                chmod 600 ~/.ssh/snowflake_tf_snow_key.p8
+                
+                # Verification: Print head and tail to check PEM format in logs
+                echo "--- KEY FILE PREVIEW ---"
+                head -n 2 ~/.ssh/snowflake_tf_snow_key.p8
+                tail -n 2 ~/.ssh/snowflake_tf_snow_key.p8
+                echo "------------------------"
+
 
       - name: Terraform Plan
         id: plan
