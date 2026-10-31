@@ -10,4 +10,4 @@ middle_name      = ""
 last_name        = "LastName"
 email            = "user@example.com"
 password         = "change-me"
-default_password = "change-me-too" # shared initial password for users created from csv/users-finance.csv
+default_password = "change-me-too" # shared initial password for users created from yaml/users-finance.yml

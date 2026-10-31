@@ -1,0 +1,13 @@
+users:
+  - first_name: John
+    last_name: Doe
+    email: john.doe@example.com
+  - first_name: Jane
+    last_name: Smith
+    email: jane.smith@example.com
+  - first_name: Alice
+    last_name: Brown
+    email: alice.brown@example.com
+  - first_name: Karen
+    last_name: Bistol
+    email: kbitol@example.com
