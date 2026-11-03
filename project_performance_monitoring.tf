@@ -1,7 +1,7 @@
 
-resource "snowflake_email_notification_integration" "email_vaaaa_j_outlook" {
-  provider     = snowflake.provider_with_ACCOUNTADMIN # <--- Telling it to use the alias
-  name    = "notification to Vaaaaa_J_outlook"
+resource "snowflake_email_notification_integration" "NOTIFICATION_TO_VAAAAA_J_OUTLOOK" {
+  provider = snowflake.provider_with_ACCOUNTADMIN # <--- Telling it to use the alias
+  name    = "NOTIFICATION_TO_VAAAAA_J_OUTLOOK"
   comment = "A notification integration."
 
   enabled            = true
@@ -9,11 +9,11 @@ resource "snowflake_email_notification_integration" "email_vaaaa_j_outlook" {
 }
 
 
-resource "snowflake_alert" "alert_to_vaaaa_j_outlook" {
+resource "snowflake_alert" "ALERT_TO_VAAAA_J_OUTLOOK" {
+  name      = "ALERT_TO_VAAAA_J_OUTLOOK"
   provider     = snowflake.provider_with_ACCOUNTADMIN # <--- Telling it to use the alias
   database  = snowflake_database.terraform_util_db.name
   schema    = snowflake_schema.util_schema.name
-  name      = "alert_to_vaaaa_j_outlook"
   warehouse = snowflake_warehouse.tf_udemy_wh.name
   
   alert_schedule {
@@ -31,7 +31,7 @@ resource "snowflake_alert" "alert_to_vaaaa_j_outlook" {
 
   action = <<-EOT
     CALL SYSTEM$SEND_EMAIL(
-      '${snowflake_email_notification_integration.email_vaaaa_j_outlook.name}',
+      '${snowflake_email_notification_integration.NOTIFICATION_TO_VAAAAA_J_OUTLOOK.name}',
       '${var.notification_email_for_operators}',
       'Snowflake: queued queries on COMPUTE_WH',
       'Queries are queuing on COMPUTE_WH. Check Query History or warehouse load.'
