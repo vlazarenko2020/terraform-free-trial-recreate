@@ -40,4 +40,8 @@ provider "snowflake" {
   role              = "ACCOUNTADMIN" # Elevated role for admin tasks
   authenticator     = "SNOWFLAKE_JWT"
   private_key       = file(pathexpand(var.private_key_path))
+preview_features_enabled = [
+    "snowflake_email_notification_integration_resource",
+    "snowflake_alert_resource"
+]
 }
