@@ -1,5 +1,6 @@
 
 resource "snowflake_email_notification_integration" "email_vaaaa_j_outlook" {
+  provider     = snowflake.provider_with_ACCOUNTADMIN # <--- Telling it to use the alias
   name    = "notification to Vaaaaa_J_outlook"
   comment = "A notification integration."
 
@@ -9,6 +10,7 @@ resource "snowflake_email_notification_integration" "email_vaaaa_j_outlook" {
 
 
 resource "snowflake_alert" "alert_to_vaaaa_j_outlook" {
+  provider     = snowflake.provider_with_ACCOUNTADMIN # <--- Telling it to use the alias
   database  = snowflake_database.terraform_util_db.name
   schema    = snowflake_schema.util_schema.name
   name      = "alert_to_vaaaa_j_outlook"
