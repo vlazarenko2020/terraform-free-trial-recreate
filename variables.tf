@@ -55,3 +55,8 @@ variable "private_key_path" {
   type        = string
   description = "Path to the PKCS#8 private key for key-pair auth"
 }
+
+variable "notification_email_for_operators" {
+  type        = string
+  description = "Email address for notification integration for operators"
+}

@@ -51,6 +51,9 @@ jobs:
       TF_VAR_password:  ${{ secrets.TMP_PASSWORD }}
       TF_VAR_default_password: ${{ secrets.TMP_DEFAULT_PASSWORD }}
 
+      # - variables for performance monitoring project
+      TF_VAR_notification_email_for_operators: ${{ secrets.NOTIFICATION_EMAIL_FOR_OPERATORS }}
+
 
       # TF_VAR_private_key_path: ${{ secrets.private_key_path }}   
       # the GitHub runner is a fresh Linux container and does not have your local ~/.ssh/snowflake_tf_snow_key.p8 file.
