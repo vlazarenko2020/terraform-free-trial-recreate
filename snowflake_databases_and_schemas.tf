@@ -34,3 +34,28 @@ resource "snowflake_schema" "terraform_test_db_bronze_schema" {
 
 }
 
+
+resource "snowflake_database" "terraform_util_db" {
+  name                        = "util_db"
+  comment                     = "This is utilities database created by Terraform"
+  data_retention_time_in_days = 5
+}
+
+# basic resource
+resource "snowflake_schema" "schema" {
+  name     = "schema_name"
+  database = "database_name"
+}
+
+# resource with all fields set
+resource "snowflake_schema" "util_schema" {
+  name                = "util_schema"
+  database            = snowflake_database.terraform_util_db.name
+  with_managed_access = true
+  is_transient        = true
+  comment             = "Utilities Schema for the utilities database created by Terraform"
+
+  data_retention_time_in_days                   = 1
+  max_data_extension_time_in_days               = 20
+  replace_invalid_characters                    = false
+}
