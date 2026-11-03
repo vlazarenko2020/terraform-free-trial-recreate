@@ -35,16 +35,12 @@ resource "snowflake_schema" "terraform_test_db_bronze_schema" {
 }
 
 
+
+
 resource "snowflake_database" "terraform_util_db" {
   name                        = "util_db"
   comment                     = "This is utilities database created by Terraform"
   data_retention_time_in_days = 5
-}
-
-# basic resource
-resource "snowflake_schema" "schema" {
-  name     = "schema_name"
-  database = "database_name"
 }
 
 # resource with all fields set
