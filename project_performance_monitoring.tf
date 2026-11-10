@@ -15,16 +15,21 @@ resource "snowflake_alert" "ALERT_TO_VAAAA_J_OUTLOOK" {
   database  = snowflake_database.terraform_util_db.name
   schema    = snowflake_schema.util_schema.name
   warehouse = snowflake_warehouse.tf_udemy_wh.name
-  
+
+# run it every hour but only from 7am to 10pm EST  
   alert_schedule {
-    interval = 10
+    cron {
+      expression = "0 7-22 * * *"
+      time_zone  = "America/New_York"
+    }
   }
 
+# each run only looks at the last 60 minutes
   condition = <<-EOT
     SELECT 1
     FROM TABLE(INFORMATION_SCHEMA.QUERY_HISTORY_BY_WAREHOUSE(
          WAREHOUSE_NAME => 'COMPUTE_WH',
-         END_TIME_RANGE_START => DATEADD('minute', -5, CURRENT_TIMESTAMP())))
+         END_TIME_RANGE_START => DATEADD('minute', -60, CURRENT_TIMESTAMP())))
     WHERE execution_status IN ('QUEUED', 'QUEUED_REPAIRING_WAREHOUSE', 'BLOCKED')
        OR queued_overload_time > 30000
   EOT
